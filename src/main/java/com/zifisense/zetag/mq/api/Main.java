@@ -8,11 +8,11 @@ public class Main {
 		String companyCode;
 		String topic;
 		//apiKey，当前版本一个企业只有一个apiKey，就是企业的企业编号，后续版本一个企业可能有多个apiKey
-		apiKey = "0d48f33151b34120a7a25d1c64387c3c";
+		apiKey = "cf86bc5d68d54932a854a62626c36823";
 		//相当于企业秘钥，后续版本可能也会有多个
-		apiSecret  = "227bdb21673241048c7fc86a9f72d69b";
+		apiSecret  = "3c109b9463504e02bd957cd935f57cae";
 		//企业编号
-		companyCode  = "0d48f33151b34120a7a25d1c64387c3c";
+		companyCode  = "cf86bc5d68d54932a854a62626c36823";
 		//描述需要获取哪些数据
 		topic = "zetag-heartbeatall";
 		//建立客户端
@@ -22,7 +22,7 @@ public class Main {
 		while (true) {
 			//循环处理收到的数据
 			c.poll().forEach(message->{
-				System.out.printf("id = %d, value = %s%n", message.getMessageId(), message.getBody());
+				System.out.printf("id = %s, value = %s%n", message.getMessageId(), message.getBody());
 			});
 			//commit之后才能继续消费下一批次数据
 			c.commit();
