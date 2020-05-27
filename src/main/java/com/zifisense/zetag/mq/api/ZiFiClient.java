@@ -1,10 +1,6 @@
 package com.zifisense.zetag.mq.api;
 
-import java.time.Duration;
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
 
 import com.zifisense.zetag.mq.api.model.Message;
 
