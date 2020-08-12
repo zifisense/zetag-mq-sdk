@@ -4,37 +4,28 @@ import com.zifisense.zetag.mq.api.imp.ClientType;
 public class Main {
 	public static void main(String[] args) {
 		
-		
 		String apiKey;
 		String apiSecret;
 		String companyCode;
 		String topic;
-		
-		if(args.length==4) {
-			apiKey = args[0];
-			apiSecret = args[1];
-			companyCode = args[2];
-			topic = args[3];
-		}else {
-			//apiKey£¬µ±Ç°°æ±¾Ò»¸öÆóÒµÖ»ÓĞÒ»¸öapiKey£¬¾ÍÊÇÆóÒµµÄÆóÒµ±àºÅ£¬ºóĞø°æ±¾Ò»¸öÆóÒµ¿ÉÄÜÓĞ¶à¸öapiKey
-			apiKey = "cf86bc5d68d54932a854a62626c36823";
-			//Ïàµ±ÓÚÆóÒµÃØÔ¿£¬ºóĞø°æ±¾¿ÉÄÜÒ²»áÓĞ¶à¸ö
-			apiSecret  = "3c109b9463504e02bd957cd935f57cae";
-			//ÆóÒµ±àºÅ
-			companyCode  = "cf86bc5d68d54932a854a62626c36823";
-			//ÃèÊöĞèÒª»ñÈ¡ÄÄĞ©Êı¾İ
-			topic = "zetag-heartbeatall";
-		}
-		//½¨Á¢¿Í»§¶Ë
+		//apiKeyï¼Œå½“å‰ç‰ˆæœ¬ä¸€ä¸ªä¼ä¸šåªæœ‰ä¸€ä¸ªapiKeyï¼Œå°±æ˜¯ä¼ä¸šçš„ä¼ä¸šç¼–å·ï¼Œåç»­ç‰ˆæœ¬ä¸€ä¸ªä¼ä¸šå¯èƒ½æœ‰å¤šä¸ªapiKey
+		apiKey = "0d48f33151b34120a7a25d1c64387c3c";
+		//ç›¸å½“äºä¼ä¸šç§˜é’¥ï¼Œåç»­ç‰ˆæœ¬å¯èƒ½ä¹Ÿä¼šæœ‰å¤šä¸ª
+		apiSecret  = "227bdb21673241048c7fc86a9f72d69b";
+		//ä¼ä¸šç¼–å·
+		companyCode  = "0d48f33151b34120a7a25d1c64387c3c";
+		//æè¿°éœ€è¦è·å–å“ªäº›æ•°æ®
+		topic = "zetag-heartbeatall";
+		//å»ºç«‹å®¢æˆ·ç«¯
 		ZiFiClient c = ClientFactory.createClient(ClientType.KAFKA,RegionEnum.CN, apiKey, apiSecret, companyCode);
-		//¶©ÔÄtopic
+		//è®¢é˜…topic
 		c.subscribe(topic);
 		while (true) {
-			//Ñ­»·´¦ÀíÊÕµ½µÄÊı¾İ
+			//å¾ªç¯å¤„ç†æ”¶åˆ°çš„æ•°æ®
 			c.poll().forEach(message->{
-				System.out.printf("id = %s, value = %s%n", message.getMessageId(), message.getBody());
+				System.out.printf("id = %d, value = %s%n", message.getMessageId(), message.getBody());
 			});
-			//commitÖ®ºó²ÅÄÜ¼ÌĞøÏû·ÑÏÂÒ»Åú´ÎÊı¾İ
+			//commitä¹‹åæ‰èƒ½ç»§ç»­æ¶ˆè´¹ä¸‹ä¸€æ‰¹æ¬¡æ•°æ®
 			c.commit();
 		}
 		

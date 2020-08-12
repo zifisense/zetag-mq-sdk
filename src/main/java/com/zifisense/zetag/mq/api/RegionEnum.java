@@ -2,7 +2,7 @@ package com.zifisense.zetag.mq.api;
 
 public enum RegionEnum {
 	
-	CN("116.62.156.176:9093");
+	CN("zetagos.zifisense.com:9093");
 	
 	RegionEnum(String url) {
 		this.url = url;
