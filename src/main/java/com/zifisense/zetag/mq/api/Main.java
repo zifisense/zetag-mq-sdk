@@ -9,13 +9,13 @@ public class Main {
 		String companyCode;
 		String topic;
 		//apiKey，当前版本一个企业只有一个apiKey，就是企业的企业编号，后续版本一个企业可能有多个apiKey
-		apiKey = "0d48f33151b34120a7a25d1c64387c3c";
+		apiKey = "27925f45b76e4045b2e534a77f8c6258";
 		//相当于企业秘钥，后续版本可能也会有多个
-		apiSecret  = "227bdb21673241048c7fc86a9f72d69b";
+		apiSecret  = "91c0cfeb0c85488580b95cf0bc449cfe";
 		//企业编号
-		companyCode  = "0d48f33151b34120a7a25d1c64387c3c";
+		companyCode  = "27925f45b76e4045b2e534a77f8c6258";
 		//描述需要获取哪些数据
-		topic = "zetag-heartbeatall";
+		topic = "device-event";
 		//建立客户端
 		ZiFiClient c = ClientFactory.createClient(ClientType.KAFKA,RegionEnum.CN, apiKey, apiSecret, companyCode);
 		//订阅topic
@@ -23,7 +23,7 @@ public class Main {
 		while (true) {
 			//循环处理收到的数据
 			c.poll().forEach(message->{
-				System.out.printf("id = %d, value = %s%n", message.getMessageId(), message.getBody());
+				System.out.printf("id = %s, value = %s%n", message.getMessageId(), message.getBody());
 			});
 			//commit之后才能继续消费下一批次数据
 			c.commit();
