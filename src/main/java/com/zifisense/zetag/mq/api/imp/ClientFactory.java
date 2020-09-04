@@ -27,9 +27,10 @@ public class ClientFactory {
 	        }
 	    }
 	
-	public static ZiFiClient createClient(ClientType type,RegionEnum region, String apiKey, String apiSecret, String companyCode){
+	
+	public static ZiFiClient createClient(ClientType type,String url, String apiKey, String apiSecret, String companyCode){
 		ZiFiClient client =  (ZiFiClient)loadImplement(type.getName());
-		client.init(region, apiKey, apiSecret, companyCode);
+		client.init(url, apiKey, apiSecret, companyCode);
 		return client;
 	}
 }

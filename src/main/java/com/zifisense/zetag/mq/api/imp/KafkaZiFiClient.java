@@ -41,8 +41,8 @@ public class KafkaZiFiClient extends ZiFiClient {
 		return new KafkaConsumer<>(props);
 	}
 	
-	public void init(RegionEnum region, String apiKey, String apiSecret, String companyCode) {
-		this.consumer = createConsumer(region.getUrl(), apiKey, apiSecret);
+	public void init(String url, String apiKey, String apiSecret, String companyCode) {
+		this.consumer = createConsumer(url, apiKey, apiSecret);
 	}
 	
 	public String getFilePath() {

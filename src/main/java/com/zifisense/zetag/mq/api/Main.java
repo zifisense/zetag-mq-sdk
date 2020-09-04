@@ -8,16 +8,22 @@ public class Main {
 		String apiSecret;
 		String companyCode;
 		String topic;
-		//apiKey，当前版本一个企业只有一个apiKey，就是企业的企业编号，后续版本一个企业可能有多个apiKey
-		apiKey = "27925f45b76e4045b2e534a77f8c6258";
-		//相当于企业秘钥，后续版本可能也会有多个
-		apiSecret  = "91c0cfeb0c85488580b95cf0bc449cfe";
-		//企业编号
-		companyCode  = "27925f45b76e4045b2e534a77f8c6258";
-		//描述需要获取哪些数据
-		topic = "device-event";
+		String url;
+		if(args.length==5) {
+			apiKey = args[0];
+			apiSecret = args[1];
+			companyCode = args[2];
+			topic = args[3];
+			url = args[4];
+		}else {
+			apiKey = "cf86bc5d68d54932a854a62626c36823";
+			apiSecret  = "3c109b9463504e02bd957cd935f57cae";
+			companyCode  = "cf86bc5d68d54932a854a62626c36823";
+			topic = "zetag-heartbeatall";
+			url = "192.168.0.26:9093";
+		}
 		//建立客户端
-		ZiFiClient c = ClientFactory.createClient(ClientType.KAFKA,RegionEnum.CN, apiKey, apiSecret, companyCode);
+		ZiFiClient c = ClientFactory.createClient(ClientType.KAFKA,url, apiKey, apiSecret, companyCode);
 		//订阅topic
 		c.subscribe(topic);
 		while (true) {
