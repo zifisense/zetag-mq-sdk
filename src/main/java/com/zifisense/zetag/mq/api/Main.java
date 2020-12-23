@@ -16,11 +16,11 @@ public class Main {
 			topic = args[3];
 			url = args[4];
 		}else {
-			apiKey = "1a6e2f488be240d1a82bcf78e3dd46c1";
-			apiSecret  = "07db07eb5ee74c6e89258ada60954156";
-			companyCode  = "1a6e2f488be240d1a82bcf78e3dd46c1";
-			topic = "zetag-heartbeat-select";
-			url = "test-cn.zifisense.com:9093";
+			apiKey = "cf86bc5d68d54932a854a62626c36823";
+			apiSecret  = "3c109b9463504e02bd957cd935f57cae";
+			companyCode  = "cf86bc5d68d54932a854a62626c36823";
+			topic = "zetag-heartbeat-all";
+			url = "192.168.0.26:9093";
 		}
 		//建立客户端
 		ZiFiClient c = ClientFactory.createClient(ClientType.KAFKA,url, apiKey, apiSecret, companyCode);
