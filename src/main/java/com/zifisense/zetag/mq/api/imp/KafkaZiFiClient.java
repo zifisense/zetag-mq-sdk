@@ -24,14 +24,14 @@ public class KafkaZiFiClient extends ZiFiClient {
 
 	private  KafkaConsumer<String, String> consumer;
 
-	private KafkaConsumer<String, String> createConsumer(String url, String apiKey, String apiSecret) {
+	private KafkaConsumer<String, String> createConsumer(String path,String url, String apiKey, String apiSecret) {
 		Properties props = new Properties();
 		props.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, url);
 		props.setProperty(ConsumerConfig.GROUP_ID_CONFIG, apiKey);
 		props.setProperty(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
 		props.setProperty(ConsumerConfig.METADATA_MAX_AGE_CONFIG, "60000");
 		props.setProperty("security.protocol", "SASL_SSL");
-		props.setProperty("ssl.truststore.location", getFilePath());
+		props.setProperty("ssl.truststore.location", path);
 		props.setProperty("ssl.truststore.password", "zifisense");
 		props.setProperty("sasl.mechanism", "PLAIN");
 		props.setProperty("sasl.jaas.config", "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"" + apiKey + "\"  password=\"" + apiSecret + "\";");
@@ -41,20 +41,8 @@ public class KafkaZiFiClient extends ZiFiClient {
 		return new KafkaConsumer<>(props);
 	}
 	
-	public void init(String url, String apiKey, String apiSecret, String companyCode) {
-		this.consumer = createConsumer(url, apiKey, apiSecret);
-	}
-	
-	public String getFilePath() {
-		String path = KafkaZiFiClient.class.getClassLoader().getResource("certificate/client.truststore.jks").getPath();
-		if(path.startsWith("/")) {
-			return path.substring(1);
-		}else if(path.startsWith("file:/")) {
-			return path.substring(6);
-		}else {
-			return path;
-		}
-		
+	public void init(String path,String url, String apiKey, String apiSecret, String companyCode) {
+		this.consumer = createConsumer(path,url, apiKey, apiSecret);
 	}
 	
 	@Override

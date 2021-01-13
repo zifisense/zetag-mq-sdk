@@ -9,21 +9,24 @@ public class Main {
 		String companyCode;
 		String topic;
 		String url;
-		if(args.length==5) {
+		String path;
+		if(args.length==6) {
 			apiKey = args[0];
 			apiSecret = args[1];
 			companyCode = args[2];
 			topic = args[3];
 			url = args[4];
+			path = args[5];
 		}else {
-			apiKey = "cf86bc5d68d54932a854a62626c36823";
-			apiSecret  = "3c109b9463504e02bd957cd935f57cae";
-			companyCode  = "cf86bc5d68d54932a854a62626c36823";
+			apiKey = "a7a99688337d11eb871b525400257cc7";
+			apiSecret  = "a7a9969d337d11eb871b525400257cc7";
+			companyCode  = "a7a99688337d11eb871b525400257cc7";
 			topic = "zetag-heartbeat-all";
-			url = "192.168.0.26:9093";
+			url = "192.168.0.36:9093";
+			path = "C:\\myHouse\\zetag-mq-sdk\\src\\main\\resources\\certificate\\client.truststore.jks";
 		}
 		//建立客户端
-		ZiFiClient c = ClientFactory.createClient(ClientType.KAFKA,url, apiKey, apiSecret, companyCode);
+		ZiFiClient c = ClientFactory.createClient(ClientType.KAFKA,path,url, apiKey, apiSecret, companyCode);
 		//订阅topic
 		c.subscribe(topic);
 		while (true) {

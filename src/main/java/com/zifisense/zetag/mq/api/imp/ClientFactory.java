@@ -28,9 +28,9 @@ public class ClientFactory {
 	    }
 	
 	
-	public static ZiFiClient createClient(ClientType type,String url, String apiKey, String apiSecret, String companyCode){
+	public static ZiFiClient createClient(ClientType type,String path,String url, String apiKey, String apiSecret, String companyCode){
 		ZiFiClient client =  (ZiFiClient)loadImplement(type.getName());
-		client.init(url, apiKey, apiSecret, companyCode);
+		client.init(path,url, apiKey, apiSecret, companyCode);
 		return client;
 	}
 }
