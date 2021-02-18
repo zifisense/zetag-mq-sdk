@@ -1,22 +1,17 @@
 package com.zifisense.zetag.mq.api.imp;
 
-import java.io.InputStream;
-import java.net.URL;
-import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.Date;
 import java.util.Properties;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 
-import com.zifisense.zetag.mq.api.RegionEnum;
 import com.zifisense.zetag.mq.api.ZiFiClient;
 import com.zifisense.zetag.mq.api.model.Message;
 
@@ -28,7 +23,7 @@ public class KafkaZiFiClient extends ZiFiClient {
 		Properties props = new Properties();
 		props.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, url);
 		props.setProperty(ConsumerConfig.GROUP_ID_CONFIG, apiKey);
-		props.setProperty(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
+		props.setProperty(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "true");
 		props.setProperty(ConsumerConfig.METADATA_MAX_AGE_CONFIG, "60000");
 		props.setProperty("security.protocol", "SASL_SSL");
 		props.setProperty("ssl.truststore.location", path);
@@ -53,7 +48,11 @@ public class KafkaZiFiClient extends ZiFiClient {
 	@Override
 	public Collection<Message> poll() {
 		Collection<Message> messages = new ArrayList<Message>();
-		ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
+		long s = System.currentTimeMillis();
+		ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(10000));
+		if(!records.isEmpty()) {
+			System.out.println("time:" + new Date(System.currentTimeMillis()).toLocaleString() + ",cost:" + (System.currentTimeMillis()-s) + ",size:" + records.count());
+		}
 		for (ConsumerRecord<String, String> record : records) {
 			messages.add(new KafkaMessage(record));
 		}

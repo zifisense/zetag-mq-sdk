@@ -3,7 +3,6 @@ import com.zifisense.zetag.mq.api.imp.ClientFactory;
 import com.zifisense.zetag.mq.api.imp.ClientType;
 public class Main {
 	public static void main(String[] args) {
-		
 		String apiKey;
 		String apiSecret;
 		String companyCode;
@@ -18,11 +17,11 @@ public class Main {
 			url = args[4];
 			path = args[5];
 		}else {
-			apiKey = "a7a99688337d11eb871b525400257cc7";
-			apiSecret  = "a7a9969d337d11eb871b525400257cc7";
-			companyCode  = "a7a99688337d11eb871b525400257cc7";
+			apiKey = "342909e75eb411ebb89f000c29533c0a";
+			apiSecret  = "342909f75eb411ebb89f000c29533c0a";
+			companyCode  = "342909e75eb411ebb89f000c29533c0a";
 			topic = "zetag-heartbeat-all";
-			url = "192.168.0.36:9093";
+			url = "192.168.1.34:9094";
 			path = "C:\\myHouse\\zetag-mq-sdk\\src\\main\\resources\\certificate\\client.truststore.jks";
 		}
 		//建立客户端
@@ -31,11 +30,9 @@ public class Main {
 		c.subscribe(topic);
 		while (true) {
 			//循环处理收到的数据
-			c.poll().forEach(message->{
-				System.out.printf("id = %s, value = %s%n", message.getMessageId(), message.getBody());
-			});
+			c.poll();
 			//commit之后才能继续消费下一批次数据
-			c.commit();
+			//c.commit();
 		}
 		
 	}
