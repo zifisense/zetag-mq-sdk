@@ -1,4 +1,4 @@
-# Zetag-mq-sdk Zeta网管平台http数据对接
+# Zetag-mq-sdk ZETag平台设备消息数据对接
 
 Common lib for Zetag Java kafkaclient.
 
