@@ -1,9 +1,5 @@
 package com.zifisense.zetag.mq.api.imp;
 
-import java.security.Provider;
-
-import javax.security.sasl.SaslException;
-
 import com.zifisense.zetag.mq.api.RegionEnum;
 import com.zifisense.zetag.mq.api.ZiFiClient;
 
@@ -30,6 +26,12 @@ public class ClientFactory {
 	public static ZiFiClient createClient(ClientType type,RegionEnum region, String apiKey, String apiSecret, String companyCode){
 		ZiFiClient client =  (ZiFiClient)loadImplement(type.getName());
 		client.init(region, apiKey, apiSecret, companyCode);
+		return client;
+	}
+
+	public static ZiFiClient createClient(ClientType type,RegionEnum region, String apiKey, String apiSecret, String companyCode, String certPath){
+		ZiFiClient client =  (ZiFiClient)loadImplement(type.getName());
+		client.init(region, apiKey, apiSecret, companyCode, certPath);
 		return client;
 	}
 }
