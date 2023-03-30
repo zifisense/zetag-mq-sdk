@@ -25,8 +25,8 @@ public class KafkaZiFiClient extends ZiFiClient {
         props.setProperty(ConsumerConfig.GROUP_ID_CONFIG, apiKey);
         props.setProperty(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
         props.setProperty(ConsumerConfig.METADATA_MAX_AGE_CONFIG, "60000");
-        props.setProperty(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, "3600000");
-        props.setProperty(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "600000");
+        props.setProperty(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, "300000");
+        props.setProperty(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "20000");
         props.setProperty("security.protocol", "SASL_SSL");
         props.setProperty("ssl.truststore.location", certPath);
         props.setProperty("ssl.truststore.password", "zifisense");
