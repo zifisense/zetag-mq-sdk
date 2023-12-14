@@ -27,6 +27,7 @@ if __name__ == '__main__':
     retries = 3
     api_key = "1e3a1fc2fad94c508317edbddd168fc9"
     api_secret = "e11955fe2817445ba8cd9b6b9e292999"
+    /** 如下所示topic为api key为v1版本时的格式；若api key为v2版本，则topic格式为 my_topic = api_key + "-v2" **/
     my_topic = api_key + "-v1-zetag-heartbeat-all"
 
     consumer = KafkaConsumer(
@@ -73,6 +74,7 @@ namespace ConsoleApp1
             var url = "zeta1303.f3322.net:9093";
             var apiKey = "1e3a1fc2fad94c508317edbddd168fc6";
             var apiSecret = "e11955fe2817445ba8cd9b6b9e29299f";
+	    // 如下所示topic为api key为v1版本时的格式；若api key为v2版本，则topic格式为 var topic = api_key + "-v2"
             var topic = "1e3a1fc2fad94c508317edbddd168fc6-v1-zetag-heartbeat-all";
 
             var config = new ConsumerConfig
